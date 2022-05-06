@@ -42,12 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectDB.cs" />
+    <Compile Include="DAOImpl\BookDAOImpl.cs" />
+    <Compile Include="DAOImpl\CategoryDAOImpl.cs" />
+    <Compile Include="DAOImpl\RoleDAOImpl.cs" />
+    <Compile Include="DAOImpl\UserDAOImpl.cs" />
+    <Compile Include="DAO\IBookDAO.cs" />
+    <Compile Include="DAO\ICategoryDAO.cs" />
+    <Compile Include="DAO\IRole.cs" />
+    <Compile Include="DAO\IUserDAO.cs" />
+    <Compile Include="DTO\BookDTO.cs" />
+    <Compile Include="DTO\CategoryDTO.cs" />
+    <Compile Include="DTO\RoleDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Libs\Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAOImpl\" />
-    <Folder Include="DAO\" />
-    <Folder Include="DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

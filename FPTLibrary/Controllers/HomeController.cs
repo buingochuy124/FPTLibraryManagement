@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using DataAccess.DTO;
 using System.Web.Mvc;
 
 namespace FPTLibrary.Controllers
@@ -10,21 +7,15 @@ namespace FPTLibrary.Controllers
     {
         public ActionResult Index()
         {
+            var userSession = (UserDTO)Session[DataAccess.Libs.Config.SessionAccount];
+            ViewBag.UserAccount = userSession;
             return View();
         }
-
-        public ActionResult About()
+        public ActionResult PopupPartial(string title, string msg)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            ViewBag.title = title;
+            ViewBag.msg = msg;
+            return PartialView();
         }
     }
 }
