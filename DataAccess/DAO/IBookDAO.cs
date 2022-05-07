@@ -1,9 +1,5 @@
 ﻿using DataAccess.DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
@@ -11,9 +7,9 @@ namespace DataAccess.DAO
     {
         List<BookDTO> Books_GetList();
 
-        int Book_Create(string BookISBN, string BookName, string Author, double Cost, int Pages, int CategoryID, string Description, string BookImageURL);
+        int Book_Create(long BookISBN, string BookName, string Author, double Cost, int Pages, int CategoryID, string Description, string BookImageURL);
 
-        BookDTO Book_GetDetail(int BookID);
+        BookDTO Book_GetDetail(long BookISBN);
 
         List<BookDTO> Books_GetListByPage(int? PageNumber, int? NumberPerPage);
     }

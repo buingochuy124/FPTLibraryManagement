@@ -121,7 +121,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\UnauthenticateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -174,10 +176,14 @@
     <Content Include="Views\Unauthenticate\Register.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Shared\DoNotHavePermission.cshtml" />
-    <Content Include="Views\Book\BookLibraryPartialView.cshtml" />
+    <Content Include="Views\Book\BookLibraryParialView.cshtml" />
+    <Content Include="Views\Book\BookDetail.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Cart\BookInCartPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

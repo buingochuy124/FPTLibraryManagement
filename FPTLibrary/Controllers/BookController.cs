@@ -1,6 +1,5 @@
 ﻿using DataAccess.DTO;
 using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace FPTLibrary.Controllers
@@ -25,7 +24,7 @@ namespace FPTLibrary.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("BookLibraryPartialView", "Book");
+                        return View();
                     }
                 }
             }
@@ -35,11 +34,10 @@ namespace FPTLibrary.Controllers
                 throw;
             }
         }
-        public ActionResult BookLibraryPartialView()
+        public ActionResult BookLibraryParialView(int? PageNumber, int? NumberPerPage)
         {
             var userSession = (UserDTO)Session[DataAccess.Libs.Config.SessionAccount];
 
-            var result = new List<DataAccess.DTO.BookDTO>();
             try
             {
                 if (userSession == null)
@@ -54,7 +52,24 @@ namespace FPTLibrary.Controllers
                     }
                     else
                     {
-                        result = new DataAccess.DAOImpl.BookDAOImpl().Books_GetList();
+                        if (PageNumber == null && NumberPerPage == null)
+                        {
+                            PageNumber = 1;
+                            NumberPerPage = 6;
+                        }
+                        var result = new DataAccess.DAOImpl.BookDAOImpl().Books_GetListByPage(PageNumber, NumberPerPage);
+                        ViewBag.CurrentPage = PageNumber;
+                        ViewBag.NumberPerPage = NumberPerPage;
+                        ViewBag.EndPage = (new DataAccess.DAOImpl.BookDAOImpl().Books_GetList().Count) / NumberPerPage + 1;
+                        if (PageNumber > ViewBag.EndPage)
+                        {
+                            return HttpNotFound();
+                        }
+                        foreach (var item in result)
+                        {
+                            item.CategoryName = new DataAccess.DAOImpl.CategoryDAOImpl()
+                                .Category_GetDetailByID(item.CategoryID).CategoryName;
+                        }
 
                         return PartialView(result);
                     }
@@ -65,7 +80,28 @@ namespace FPTLibrary.Controllers
 
                 throw;
             }
-      
+
+        }
+        public ActionResult BookDetail(long BookISBN)
+        {
+            var userSession = (UserDTO)Session[DataAccess.Libs.Config.SessionAccount];
+            if (userSession == null)
+            {
+                return RedirectToAction("Login", "Unauthenticate");
+            }
+            else
+            {
+                if (userSession.RoleID != 2)
+                {
+                    return RedirectToAction("DoNotHavePermission", "Shared");
+                }
+                else
+                {
+                    var result = new DataAccess.DAOImpl.BookDAOImpl().Book_GetDetail(BookISBN);
+                    return View(result);
+
+                }
+            }
         }
 
     }

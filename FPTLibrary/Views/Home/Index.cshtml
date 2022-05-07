@@ -1,22 +1,20 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    var userAccount = ViewBag.UserAccount;
+    var userRoleID = ViewBag.UserID;
 
 }
 
-@{
-    if (userAccount == 1)
+@*@{
+    if (userRoleID == 1)
     {
         @Html.Action("UserManagementPartialView", "User")
     }
-    else if (userAccount == 2)
+    else if (userRoleID == 2)
     {
-        @Html.Action("BookLibraryPartialView", "Book")
     }
     else
     {
         @Html.Action("StorePartialView", "Store")
-    }
+    }*@
 
-}
 
